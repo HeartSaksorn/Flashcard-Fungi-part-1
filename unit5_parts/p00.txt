@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Unit 5 — Kingdom Fungi Detailed Flashcards</title>
+<style>
+:root{--bg:#f6f7fb;--card:#fff;--ink:#182230;--muted:#667085;--line:#e4e7ec;--blue:#4255ff;--deep:#2e3856;--green:#079455;--red:#d92d20;--gold:#f4b400;--exam:#fff4e8}
+*{box-sizing:border-box}
+body{margin:0;font-family:Inter,"Noto Sans Thai",Tahoma,Arial,sans-serif;background:var(--bg);color:var(--ink)}
+.app{max-width:1240px;margin:auto;padding:20px}
+.top{display:flex;justify-content:space-between;gap:14px;align-items:flex-start;flex-wrap:wrap}
+.brand{color:var(--blue);font-weight:900;font-size:21px}
+h1{margin:14px 0 6px;font-size:clamp(26px,4vw,42px)}
+.sub{color:var(--muted);line-height:1.65;max-width:1000px}
+.actions{display:flex;gap:8px;flex-wrap:wrap}
+button,select,input{font:inherit}
+button{cursor:pointer;border:1px solid var(--line);background:#fff;border-radius:11px;padding:10px 13px;font-weight:700}
+button:hover{background:#fafbff}
+.filters{display:grid;grid-template-columns:1.25fr 1fr auto auto;gap:9px;margin:18px 0 10px}
+input,select{border:1px solid var(--line);background:#fff;border-radius:11px;padding:11px 12px}
+.stats{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px}
+.pill{border:1px solid var(--line);background:#fff;border-radius:999px;padding:7px 10px;color:#475467;font-size:13px;font-weight:700}
+.progress{height:7px;background:#e8ebf3;border-radius:999px;overflow:hidden;margin-bottom:16px}
+.progress>div{height:100%;background:var(--blue);transition:.2s}
+.cardwrap{perspective:1500px;min-height:700px}
+.card{position:relative;min-height:700px;transform-style:preserve-3d;transition:transform .48s;cursor:pointer}
+.card.flipped{transform:rotateX(180deg)}
+.face{position:absolute;inset:0;backface-visibility:hidden;background:#fff;border:1px solid var(--line);border-radius:19px;box-shadow:0 14px 42px #10182812;padding:31px 38px;display:flex;flex-direction:column;overflow:auto}
+.back{transform:rotateX(180deg)}
+.headrow{display:flex;justify-content:space-between;gap:12px;align-items:center;margin-bottom:18px}
+.cat{font-size:13px;font-weight:850;color:var(--blue)}
+.badge{font-size:12px;font-weight:850;background:var(--exam);border:1px solid #fedf89;color:#b54708;border-radius:999px;padding:5px 8px}
+.term{font-size:clamp(28px,4vw,46px);font-weight:820;line-height:1.35;margin:auto 0}
+.answer{font-size:clamp(23px,3vw,34px);font-weight:850;color:var(--deep);line-height:1.45}
+.detail{font-size:17px;line-height:1.75;color:#475467;margin-top:15px}
+.box{margin-top:14px;padding:12px 14px;border-radius:11px;line-height:1.62}
+.memo{background:#f0f3ff;border-left:4px solid var(--blue)}
+.ety{background:#f8f9fb;border:1px solid var(--line)}
+.noteBox{background:#fff8e6;border:1px solid #f4d487}
+.steps{display:flex;gap:6px;flex-wrap:wrap;align-items:center;margin-top:15px}
+.step{background:#f4f3ff;border:1px solid #d9d6fe;padding:7px 9px;border-radius:9px;font-size:13px;font-weight:750}
+.arr{color:#98a2b3;font-weight:900}
+.media{display:flex;justify-content:center;margin:16px 0 4px}
+.media img{max-width:min(560px,92%);max-height:300px;object-fit:contain;border:1px solid var(--line);border-radius:12px;background:#fff}
+.front .media img{max-height:325px}
+.caption{font-size:12px;color:#98a2b3;text-align:center;margin-top:6px}
+.source{font-size:12px;color:#98a2b3;margin-top:16px;padding-top:12px;border-top:1px dashed var(--line)}
+.hint{margin-top:auto;color:#98a2b3;font-size:13px;padding-top:20px}
+.nav{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:9px;margin-top:14px}
+#again{color:var(--red)} #know{color:var(--green)}
+.listbox{margin-top:24px;background:#fff;border:1px solid var(--line);border-radius:16px;padding:15px}
+.list{display:grid;gap:7px;max-height:420px;overflow:auto;margin-top:10px}
+.item{display:grid;grid-template-columns:1fr auto;gap:8px;border:1px solid var(--line);border-radius:9px;padding:10px 11px;cursor:pointer}
+.item:hover,.item.active{border-color:#aeb8ff;background:#f7f8ff}
+.item small{color:#98a2b3}
+.star{border:none;background:transparent;font-size:24px;padding:0;line-height:1}
+.star.on{color:var(--gold)}
+.empty{padding:34px;text-align:center;background:#fff;border:1px solid var(--line);border-radius:15px;color:var(--muted);display:none}
+.footer-note{font-size:13px;color:#667085;line-height:1.65;margin:16px 2px}
+@media(max-width:760px){
+ .filters{grid-template-columns:1fr 1fr} .filters input{grid-column:1/-1}
+ .cardwrap,.card{min-height:810px} .face{padding:24px 21px}
+ .nav{grid-template-columns:1fr 1fr} .media img{max-height:240px}
+}
+</style>
+</head>
+<body>
+<div class="app">
+<div class="top">
+ <div>
+  <div class="brand">Fungi Study · Quizlet-style</div>
+  <h1>Unit 5: Kingdom Fungi — Detailed</h1>
+  <div class="sub">Chytridiomycota + Allomyces + Rozella + Synchytrium/Chytriomyces + Zygomycota + Mucorales + Mucor/Rhizopus และ families สำคัญ + Entomophthorales + Zoopagales + Trichomycetes พร้อมภาพจาก lecture และปุ่มกรองหัวข้อที่เคยออกข้อสอบเก่า</div>
+ </div>
+ <div class="actions"><button id="shuffle">🔀 สุ่ม</button><button id="reset">↺ เริ่มใหม่</button></div>
+</div>
+
+<div class="filters">
+ <input id="search" placeholder="ค้นหา เช่น Allomyces, zygospore, Rhizopus, Pilobolus...">
+ <select id="cat"></select>
+ <button id="examOnly">🎯 ข้อสอบเก่า</button>
+ <button id="starOnly">★ ที่บันทึก</button>
+</div>
+
+<div class="stats">
+ <span class="pill" id="counter"></span><span class="pill" id="score"></span><span class="pill" id="deckstat"></span>
+</div>
+<div class="progress"><div id="bar"></div></div>
+<div id="empty" class="empty">ไม่พบการ์ดตามตัวกรอง</div>
+
+<div id="wrap" class="cardwrap">
+ <div id="card" class="card">
+  <section class="face front">
+   <div class="headrow"><div class="cat" id="fcat"></div><div style="display:flex;gap:8px;align-items:center"><span id="fbadge"></span><button class="star" id="star">☆</button></div></div>
+   <div class="media" id="frontMedia" style="display:none"><div><img id="frontImg"><div class="caption" id="frontCap"></div></div></div>
+   <div class="term" id="term"></div>
+   <div class="hint">คลิกการ์ด หรือกด Space เพื่อดูคำตอบ</div>
+  </section>
+  <section class="face back">
+   <div class="headrow"><div class="cat" id="bcat"></div><span id="bbadge"></span></div>
+   <div class="answer" id="answer"></div>
+   <div class="media" id="backMedia" style="display:none"><div><img id="backImg"><div class="caption" id="backCap"></div></div></div>
+   <div class="detail" id="detail"></div>
+   <div class="steps" id="steps"></div>
+   <div class="box ety" id="etyBox" style="display:none"><b>รากศัพท์:</b> <span id="ety"></span></div>
+   <div class="box memo" id="memoBox" style="display:none"><b>🧠 วิธีจำ:</b> <span id="memo"></span></div>
+   <div class="box noteBox" id="noteBox" style="display:none"><b>หมายเหตุจาก source:</b> <span id="note"></span></div>
+   <div class="source" id="source"></div>
+  </section>
+ </div>
+</div>
+
+<div class="nav">
+ <button id="prev">← ก่อนหน้า</button><button id="again">↻ ทบทวนอีก</button><button id="know">✓ จำได้</button><button id="next">ถัดไป →</button>
+</div>
+
+<div class="listbox">
+ <b>การ์ดทั้งหมด</b>
+ <div class="list" id="list"></div>
+</div>
+<div class="footer-note">เนื้อหาหลักยึดตาม <b>5.pdf, 6.pdf, 7.pdf และ Notes Fungi P.1</b> ของรายวิชา โดยใช้ terminology และ conventional taxonomy ตาม lecture ชุดนี้ ส่วนป้าย 🎯 ใช้เฉพาะประเด็นที่พบตรง ๆ ในข้อสอบเก่าหรือเป็นคำถามภาพ/โครงสร้างที่ข้อสอบเก่าเน้น</div>
+</div>
+
+<script>
+const original=[{"id": 1, "cat": "1 · Chytridiomycota", "term": "Phylum Chytridiomycota มีจุดเด่นที่สุดอะไรใน Kingdom Fungi?", "answer": "เป็นกลุ่ม True Fungi ที่มี motile cell คือ zoospore ในช่วงหนึ่งของ life cycle", "detail": "Lecture ระบุว่า zoospore มี single smooth posterior flagellum และเป็น character สำคัญมากของ chytrids", "memo": "Chytrid = ราแท้ที่ยัง “ว่ายน้ำ” ได้", "source": "5.pdf p.63; Notes Unit 5", "exam": true, "front_img": "", "back_img": "", "imgcap": "", "ety": "", "steps": [], "note": ""}, {"id": 2, "cat": "1 · Chytridiomycota", "term": "Zoospore ของ Chytridiomycota มี flagellum แบบใด?", "answer": "Single smooth posterior flagellum หรือ posterior whiplash flagellum", "detail": "ต่างจาก Oomycota ที่เป็น biflagellate มี anterior tinsel + posterior smooth", "memo": "Chytrid = 1 หางด้านหลัง", "source": "5.pdf p.63", "exam": true, "front_img": "", "back_img": "", "imgcap": "", "ety": "", "steps": [], "note": ""}, {"id": 3, "cat": "1 · Chytridiomycota", "term": "Thallus ของ Chytridiomycota โดยทั่วไปเป็นแบบใด?", "answer": "Coenocytic thallus และบางชนิดมี rhizomycelium", "detail": "จึงเป็น basal fungal morphology ที่ต่างจาก higher fungi หลายกลุ่มซึ่งมี septate hyphae ชัดเจน", "memo": "Chytrid = coenocytic + rhizomycelium ได้", "source": "5.pdf p.63", "exam": false, "front_img": "", "back_img": "", "imgcap": "", "ety": "", "steps": [], "note": ""}, {"id": 4, "cat": "1 · Chytridiomycota", "term": "Zygote ของ Chytridiomycota สามารถพัฒนาเป็นอะไร?", "answer": "Resting spore หรือ diploid thallus", "detail": "Lecture ใช้ conversion of the zygote into a resting spore or diploid thallus เป็น general characteristic", "memo": "Zygote = พัก หรือไปต่อเป็น 2n thallus", "source": "5.pdf p.63", "exam": false, "front_img": "", "back_img": "", "imgcap": "", "ety": "", "steps": [], "note": ""}, {"id": 5, "cat": "1 · Chytridiomycota", "term": "Cell wall ของ Chytridiomycota มีองค์ประกอบอะไร?", "answer": "Chitin และ glucan; lecture ระบุว่ามีหนึ่ง species ที่ตรวจพบ cellulose", "detail": "ให้ยึด framing ตาม lecture ไม่ควรเหมารวมว่าทุกชนิดมี cellulose", "memo": "Chytrid = chitin + glucan", "source": "5.pdf p.63", "exam": false, "front_img": "", "back_img": "", "imgcap": "", "ety": "", "steps": [], "note": ""}, {"id": 6, "cat": "1 · Chytridiomycota", "term": "Chytridiomycota ดำรงชีวิตได้แบบใด?", "answer": "เป็นทั้ง saprobes และ parasites", "detail": "Parasites พบใน plants, animals โดยเฉพาะ insects/ruminants และ fungi เช่น Ascomycota/Basidiomycota", "memo"
