@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fungi Unit 2 — Fungal Classification</title>
+<style>
+:root {
+  --bg:#f6f7fb; --card:#ffffff; --ink:#1f2937; --muted:#697386;
+  --blue:#4255ff; --blue2:#2e3856; --line:#e5e7eb; --green:#23b26d; --red:#ef5b5b;
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:Inter,"Noto Sans Thai",Tahoma,Arial,sans-serif;background:var(--bg);color:var(--ink)}
+.app{max-width:1200px;margin:auto;padding:18px 20px 42px}
+.topbar{display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap}
+.brand{font-size:22px;font-weight:850;color:var(--blue)} 
+.title{font-size:clamp(24px,4vw,38px);font-weight:850;margin:18px 0 8px}
+.sub{color:var(--muted);line-height:1.6}
+.tabs{display:flex;gap:18px;margin:22px 0 14px;border-bottom:1px solid var(--line)}
+.tab{padding:11px 2px;border-bottom:3px solid transparent;font-weight:750;color:#697386}
+.tab.active{color:var(--blue);border-color:var(--blue)}
+.studybar{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin:14px 0}
+.counter{font-weight:700;color:#475467} 
+.actions{display:flex;gap:8px}
+.iconbtn{border:1px solid var(--line);background:#fff;border-radius:10px;padding:9px 12px;cursor:pointer}
+.progress{height:7px;background:#e9ecf4;border-radius:999px;overflow:hidden;margin-bottom:18px}
+.progress>div{height:100%;background:var(--blue);width:0;transition:.25s}
+.cardwrap{perspective:1400px;min-height:540px}
+.card{position:relative;min-height:540px;transform-style:preserve-3d;transition:transform .48s;cursor:pointer}
+.card.flipped{transform:rotateX(180deg)}
+.face{position:absolute;inset:0;backface-visibility:hidden;background:var(--card);border-radius:18px;box-shadow:0 10px 32px #10182812;border:1px solid #eaecf0;padding:34px 42px;display:flex;flex-direction:column;justify-content:center}
+.back{transform:rotateX(180deg)}
+.label{font-size:13px;text-transform:uppercase;letter-spacing:.08em;color:#98a2b3;font-weight:800;margin-bottom:18px}
+.term{font-size:clamp(28px,4vw,46px);font-weight:750;line-height:1.35}
+.answer{font-size:clamp(24px,3vw,36px);font-weight:800;line-height:1.4;color:var(--blue2)}
+.detail{font-size:17px;line-height:1.75;color:#475467;margin-top:18px;max-width:920px}
+.memo{margin-top:18px;background:#f0f3ff;border-left:4px solid var(--blue);padding:12px 14px;border-radius:10px;color:#364152;line-height:1.6}
+.source{margin-top:18px;font-size:12px;color:#98a2b3}
+.hint{margin-top:auto;padding-top:24px;color:#98a2b3;font-size:13px}
+.nav{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:10px;margin-top:16px}
+.nav button{border:1px solid var(--line);background:#fff;border-radius:12px;padding:13px 10px;font:inherit;font-weight:750;cursor:pointer}
+#again{color:var(--red);border-color:#f7c7c7} #know{color:var(--green);border-color:#bce8d1}
+.sidebar{margin-top:26px;background:#fff;border:1px solid var(--line);border-radius:16px;padding:16px}
+.sidebar h3{margin:0 0 12px} .search{width:100%;padding:12px 13px;border:1px solid var(--line);border-radius:10px;font:inherit}
+.list{margin-top:12px;display:grid;gap:8px;max-height:420px;overflow:auto}
+.item{padding:11px 12px;border:1px solid var(--line);border-radius:10px;cursor:pointer;display:flex;justify-content:space-between;gap:10px}
+.item:hover{border-color:#aeb8ff;background:#fafbff} .item.active{border-color:var(--blue);background:#f4f6ff}
+.item small{color:#98a2b3;white-space:nowrap}
+.footer-note{margin-top:18px;color:#98a2b3;font-size:13px;line-height:1.55}
+@media(max-width:700px){
+  .face{padding:26px 22px} .cardwrap,.card{min-height:590px}
+  .nav{grid-template-columns:1fr 1fr}
+}
+</style>
+</head>
+<body>
+<div class="app">
+  <div class="topbar">
+    <div class="brand">Fungi Study</div>
+    <div class="actions">
+      <button class="iconbtn" id="shuffle">🔀 สุ่ม</button>
+      <button class="iconbtn" id="reset">↺ เริ่มใหม่</button>
+    </div>
+  </div>
+
+  <div class="title">Unit 2: Fungal classification</div>
+  <div class="sub">Flashcards แบบละเอียด อิงจาก Notes Fungi P.1(1).pdf หน้า 2–3 • ครอบคลุม timeline, classification แบบ Alexopoulos 1996, Fungi Imperfecti, Dikarya และ phyla สำคัญใน current framework ตามโน้ต</div>
+
+  <div class="tabs">
+    <div class="tab active">Flashcards</div>
+    <div class="tab">Fungal classification</div>
+  </div>
+
+  <div class="studybar">
+    <div class="counter" id="counter"></div>
+    <div id="score" class="counter">จำได้ 0 · ทบทวน 0</div>
+  </div>
+  <div class="progress"><div id="bar"></div></div>
+
+  <div class="cardwrap">
+    <div class="card" id="card">
+      <section class="face front">
+        <div class="label">TERM / QUESTION</div>
+        <div class="term" id="term"></div>
+        <div class="hint">คลิกการ์ด หรือกด Space เพื่อดูคำตอบ</div>
+      </section>
+      <section class="face back">
+        <div class="label">DEFINITION / ANSWER</div>
+        <div class="answer" id="answer"></div>
+        <div class="detail" id="detail"></div>
+        <div class="memo" id="memo"></div>
+        <div class="source" id="source"></div>
+      </section>
+    </div>
+  </div>
+
+  <div class="nav">
+    <button id="prev">← ก่อนหน้า</button>
+    <button id="again">↻ ทบทวนอีก</button>
+    <button id="know">✓ จำได้</button>
+    <button id="next">ถัดไป →</button>
+  </div>
+
+  <div class="sidebar">
+    <h3>การ์ดทั้งหมดใน Unit 2</h3>
+    <input class="search" id="search" placeholder="ค้นหา เช่น Dikarya, Microsporidia, Chytrid...">
+    <div class="list" id="list"></div>
+  </div>
+
+  <div class="footer-note">หมายเหตุ: เนื้อหาหลักยึดตาม taxonomy และ framing ในไฟล์ รวมทั้งจุดที่โน้ตระบุว่าเป็น historical/current framework; “วิธีจำ” เป็นตัวช่วยเสริมเพื่อการทบทวน</div>
+</div>
+
+<script>
+const original = [{"term": "Unit 2: Fungal classification เริ่มจากแนวคิดสำคัญอะไร?", "answer": "การจัดจำแนกราเปลี่ยนตามหลักฐานที่ดีขึ้น โดยเฉพาะจาก morphology → organelles → DNA sequencing → phylogenetic information", "detail": "ในโน้ต Unit 2 เริ่มจากการเตือนว่าแหล่งข้อมูลเก่าอาจใช้ดูรายละเอียดได้ แต่ taxonomy ควรอิงงานที่ใหม่กว่าและมีหลักฐาน phylogeny รองรับ", "memo": "จำเป็นเรื่อง: “ดูรูปร่าง → ดู organelle → อ่าน DNA → สร้าง tree”", "page": 2}, {"term": "Introductory Mycology ของ Alexopoulos ควรใช้ดูอะไรตามโน้ต?", "answer": "ใช้ดูรายละเอียด (detail) ได้ แต่ไม่ควรยึด taxonomy เป็นปัจจุบัน", "detail": "เพราะระบบการจัดจำแนกราเปลี่ยนไปตามข้อมูล molecular และ phylogenetic ที่ใหม่กว่า", "memo": "Alexopoulos = detail ดี แต่ taxonomy ต้องดูปี", "page": 2}, {"term": "งานของ Hibbett ใน Mycological Research ถูกใช้ในโน้ตอย่างไร?", "answer": "เป็นตัวอย่างงานวิจัยด้าน fungal classification ที่โน้ตมองว่าน่าเชื่อถือกว่าในเชิง taxonomy สมัยใหม่", "detail": "แนวคิดหลักคือการจัดจำแนกควรอิง phylogenetic evidence มากกว่าระบบเก่าเพียงอย่างเดียว", "memo": "Hibbett = newer tree", "page": 2}, {"term": "โน้ตกล่าวถึงข้อเสนอ 9 Subkingdom 18 Phyla อย่างไร?", "answer": "เป็นข้อเสนอจากงานวิจัย แต่โน้ตเขียนกำกับว่า “Not proof”", "detail": "จึงควรจำว่าเป็นกรอบเสนอหนึ่ง ไม่ใช่สิ่งที่โน้ตให้ถือเป็นข้อสรุปตายตัว", "memo": "เห็นคำว่า Not proof → อย่าท่องเป็น truth แบบแข็ง", "page": 2}, {"term": "1676 Antonie van Leeuwenhoek มีความสำคัญอย่างไรใน timeline?", "answer": "ค้นพบ/สังเกต micro-organisms", "detail": "เป็นจุดเริ่มต้นสำคัญของการมองเห็นสิ่งมีชีวิตขนาดเล็ก ซึ่งต่อมานำไปสู่การศึกษาราและจุลชีพอย่างเป็นระบบ", "memo": "Leeuwenhoek = เห็นของเล็ก", "page": 2}, {"term": "1859 Darwin เชื่อมกับแนวคิดใดใน fungal classification?", "answer": "Origin of Species by Means of Natural Selection", "detail": "แนวคิดวิวัฒนาการและ natural selection เป็นพื้นฐานให้การจัดจำแนกสิ่งมีชีวิตขยับจากการจัดตามรูปร่างอย่างเดียว ไปสู่การมองความสัมพันธ์เชิงวิวัฒนาการ", "memo": "Darwin = Evolution framework", "page": 2}, {"term": "1866 Anton de Bary มีบทบาทอะไรตามโน้ต?", "answer": "นำแนวคิด evolution เข้ามาเชื่อมกับ fungal classification", "detail": "de Bary เป็นบุคคลสำคัญในประวัติ mycology และใน timeline ของโน้ตใช้เป็นจุดที่ evolutionary thinking เริ่มเข้ามาใน fungal classification", "memo": "de Bary = evolution เข้าโลกของรา", "page": 2}, {"term": "1952 Alexopoulos อธิบายเรื่องใดตาม timeline?", "answer": "Actinomycetes และ physiology", "detail": "เป็นหนึ่งในช่วงที่ความรู้ด้านกลุ่มจุลชีพและ physiology ถูกนำมาใช้ประกอบความเข้าใจการจัดจำแนก", "memo": "1952 = Actino + Physio", "page": 2}, {"term": "1962 Alexopoulos เคยจัดกลุ่มใดว่าเป็นรา แต่ปัจจุบันไม่ใช่ตามโน้ต?", "answer": "Labyrinthulales, Trichomycetes และ Hyphochytridiomycetes", "detail": "โน้ตใช้ตัวอย่างนี้เพื่อชี้ให้เห็นว่าความเข้าใจ taxonomy เปลี่ยนได้เมื่อมีข้อมูลใหม่", "memo": "1962 = หลายกลุ่ม “เคยคิดว่าเป็นรา”", "page": 2}, {"term": "1979 Alexopoulos เชื่อมกับหลักฐานชนิดใด?", "answer": "การมอง organelles จาก electron micrographs", "detail": "เมื่อมองเห็นโครงสร้างละเอียดภายในเซลล์ได้ดีขึ้น ก็สามารถใช้ organelle characteristics เป็นข้อมูลช่วยแยกกลุ่มได้", "memo": "1979 = EM เห็น organelle", "page": 2}, {"term": "1986 มีเทคโนโลยีใดเข้ามาเปลี่ยน taxonomy?", "answer": "Automated DNA sequencing machines", "detail": "นี่เป็นจุดสำคัญที่ทำให้ classification เริ่มพึ่ง molecular data มากขึ้นและสร้าง phylogeny ได้แม่นยำกว่าเดิม", "memo": "1986 = DNA machine", "page": 2}, {"term": "1990 Carl Woese เสนอระบบใด?", "answer": "3 Domains: Archaea, Bacteria และ Eukaryota", "detail": "ระบบ 3 domains เป็นกรอบใหญ่ที่เปลี่ยนมุมมองการจัดสิ่งมีชีวิตระดับสูงและวาง Fungi อยู่ใน Eukaryota", "memo": "Woese = 3 Domains", "page": 2}, {"term": "1996 Alexopoulos เชื่อมกับอะไรตาม timeline?", "answer": "Phylogenetic information", "detail": "ช่วงนี้โน้ตเชื่อมการจัดจำแนกกับข้อมูลสายสัมพันธ์เชิงวิวัฒนาการมากขึ้น", "memo": "1996 = phylogeny ชัดขึ้น", "page": 2}, {"term": "จำ timeline ของ Unit 2 แบบสั้นได้อย่างไร?", "answer": "เห็นจุลชีพ → เข้าใจ evolution → เอา evolution เข้าการจัดรา → เห็น organelle → อ่าน DNA → 3 Domains → phylogeny", "detail": "ลำดับนี้ช่วยจำภาพใหญ่ได้ดีกว่าท่องปีแบบแยกชิ้น", "memo": "“เห็น–วิวัฒน์–จัดรา–ส่องลึก–อ่าน DNA–3 domain–สร้าง tree”", "page": 2}, {"term": "Sexual spores ที่โน้ตใช้เชื่อมกับ Kingdom Fungi มีอะไรบ้าง?", "answer": "Zoospore, Zygospore, Ascospore และ Basidiospore", "detail": "ในระบบดั้งเดิม ชนิดของ sexual/reproductive spore เป็นลักษณะสำคัญที่ใช้แยก phyla หลัก", "memo": "Zoo – Zygo – Asco – Basidio", "page": 2}, {"term": "Alexopoulos 1996 แบ่ง Kingdom Fungi เป็น 4 Phyla อะไรบ้าง?", "answer": "Chytridiomycota, Zygomycota, Ascomycota และ Basidiomycota", "detail": "นี่เป็นกรอบ classification แบบเก่าที่โน้ตต้องการให้เข้าใจเพื่อใช้เปรียบเทียบกับระบบใหม่", "memo": "Chy – Zy – As – Ba", "page": 3}, {"term": "Chytridiomycota ในระบบ Alexopoulos 1996 มีลักษณะเด่นอะไร?", "answer": "เป็น aquatic fungi และมี single-flagellate zoospore", "detail": "คำสำคัญคือ motile zoospore ซึ่งเป็นลักษณะที่ช่วยแยก chytrids จาก higher fungi", "memo": "Chytrid = ราแท้ที่ยังว่ายได้", "page": 3}, {"term": "Zygomycota ในระบบเก่ามีลักษณะเด่นอะไร?", "answer": "Non-septate hyphae และ sexual reproduction ให้ zygospore", "detail": "ตัวอย่างที่โน้ตยกคือ bread mold/black mold", "memo": "Zygo = จับคู่ → Zygospore", "page": 3}, {"term": "Ascomycota ในระบบเก่ามีลักษณะเด่นอะไร?", "answer": "Septate hyphae และ sexual reproduction ให้ ascospore", "detail": "โน้ตเรียกกลุ่มนี้ว่า sac fungi เพราะ ascospore เกิดใน ascus", "memo": "Asco = sac", "page": 3}, {"term": "Basidiomycota ในระบบเก่ามีลักษณะเด่นอะไร?", "answer": "Septate hyphae และ sexual reproduction ให้ basidiospore", "detail": "โน้ตเรียก club fungi เพราะ basidium มีรูปร่างคล้ายกระบอง", "memo": "Basidio = club", "page": 3}, {"term": "Fungi Imperfecti หมายถึงอะไรในระบบดั้งเดิม?", "answer": "กลุ่มราที่พบ septate hyphae แต่ยังไม่พบ sexual reproduction", "detail": "เดิมถูกจัดแยกเพราะยังไม่รู้ sexual stage แต่เมื่อมีข้อมูลเพิ่มก็สามารถวางเข้ากลุ่มญาติจริงได้", "memo": "Imperfecti = ยังไม่เห็น sexual stage", "page": 3}, {"term": "เหตุใด Fungi Imperfecti จึงถูกเอาออกจาก classification แบบใหม่?", "answer": "เพราะ phylogenetic data ช่วยระบุญาติที่แท้จริงได้ จึงไม่จำเป็นต้องเก็บเป็นกลุ่ม artificial แยกต่างหาก", "detail": "โน้ตระบุว่ากลุ่มเหล่านี้จำนวนมากภายหลังถูกวางใน Ascomycota หรือ Basidiomycota", "memo": "ไม่เห็น sex ≠ ไม่มีญาติ", "page": 3}, {"term": "Subkingdom Dikarya คืออะไร?", "answer": "กลุ่มราที่มีระยะ 2 nuclei เด่น โดยในกรอบหลักรวม Ascomycota และ Basidiomycota", "detail": "คำว่า Dikarya สื่อถึงภาวะสองนิวเคลียส และเป็นกลุ่มใหญ่ของ higher fungi ใน classification สมัยใหม่", "memo": "Di = 2 + karyon = nucleus", "page": 3}, {"term": "คำว่า Dikarya แปลจากรากศัพท์อย่างไร?", "answer": "Di = สอง + karyon = nucleus → กลุ่มที่มีสองนิวเคลียส", "detail": "รากศัพท์ช่วยจำว่าทำไมกลุ่มนี้จึงสัมพันธ์กับระยะ dikaryotic", "memo": "Dikarya = สองหัว", "page": 3}, {"term": "Microsporidia มีลักษณะเด่นอะไร?", "answer": "เป็น uncultivable intracellular parasites ที่สร้าง spores และมี polar tube", "detail": "Spore มี coating ของ protein และ chitin ตามโน้ต", "memo": "Microsporidia = inside cell + spore + polar tube", "page": 3}, {"term": "Polar tube หรือ Polar filament พบเด่นในกลุ่มใด?", "answer": "Microsporidia", "detail": "โครงสร้างนี้ขดเป็น coil ภายใน spore และเป็น character สำคัญของกลุ่ม", "memo": "Microsporidia → polar coil", "page": 3}, {"term": "ทำไมชื่อ Microsporidia ในโน้ตจึงถูกทำเครื่องหมายว่าไม่ลงท้าย -mycota?", "answer": "โน้ตใช้เป็นจุดสังเกตว่าการวางกลุ่มนี้ใน taxonomy ของราเคยมีความไม่แน่นอน/ไม่ใช่กรอบแบบ phylum ชื่อ -mycota ตาม conventional fungi", "detail": "ให้ยึดตาม framing ของโน้ตว่าเป็นกลุ่มที่ต้องระวังเมื่ออ่าน classification เก่า", "memo": "ไม่มี -mycota → ตั้งคำถาม taxonomy", "page": 3}, {"term": "Chytridiomycota พบใน habitat แบบใด?", "answer": "พบได้ทั้งน้ำจืดและบนบก", "detail": "มีทั้ง saprobic และ parasitic forms", "memo": "Chytrid = น้ำก็ได้ บกก็ได้", "page": 3}, {"term": "Zoospore ของ Chytridiomycota มี flagellum แบบใด?", "answer": "Uniflagellate zoospore ที่ flagellum อยู่ด้าน posterior", "detail": "จุดจำคือ “single posterior flagellum”", "memo": "Chytrid = 1 หางด้านหลัง", "page": 3}, {"term": "Neocallimastigomycota พบเด่นที่ใด?", "answer": "ในทางเดินอาหารของสัตว์กินพืช และเป็น anaerobic fungi", "detail": "กลุ่มนี้ปรับตัวต่อสภาวะไร้ออกซิเจนได้ดี", "memo": "Neo = ราในท้องสัตว์กินพืช", "page": 3}, {"term": "Zoospore ของ Neocallimastigomycota มีลักษณะอย่างไร?", "answer": "Posterior multiflagellate zoospore", "detail": "ต่างจาก Chytridiomycota ที่มี posterior flagellum เพียงเส้นเดียว", "memo": "Neo = many tails behind", "page": 3}, {"term": "Hydrogenosome มีความสำคัญอย่างไรใน Neocallimastigomycota?", "answer": "ทำหน้าที่แทน mitochondria ในสภาวะไร้ออกซิเจน", "detail": "เป็น adaptation สำคัญของ anaerobic fungi ในทางเดินอาหารสัตว์กินพืช", "memo": "No O₂ → Hydrogenosome", "page": 3}, {"term": "Blastocladiomycota มีลักษณะเด่นอะไร?", "answer": "มี extensive mycelia, มี sexual และ asexual reproduction แยกชัด และมี single posterior flagellum", "detail": "ภายหลังใน Unit 5 จะเชื่อมกับ Allomyces และ Order Blastocladiales", "memo": "Blasto = branch เยอะ + วงจร 2 แบบ", "page": 3}, {"term": "Zygomycota ในกรอบดั้งเดิมมี Asexual spore อะไร?", "answer": "Sporangiospore ที่อยู่ภายใน sporangium", "detail": "เป็นลักษณะสำคัญของ bread molds หลายชนิด เช่น Mucor และ Rhizopus", "memo": "Asexual = sporangiospore", "page": 3}, {"term": "Zygomycota ในกรอบดั้งเดิมมี Sexual spore อะไร?", "answer": "Zygospore", "detail": "เป็น thick-walled resting sexual spore ในกลุ่มนี้", "memo": "Sexual = zygospore", "page": 3}, {"term": "Glomeromycota เคยถูกจัดอยู่ในกลุ่มใด?", "answer": "Zygomycota", "detail": "เมื่อ phylogenetic evidence ดีขึ้นจึงถูกแยกเป็นกลุ่มของตัวเอง", "memo": "Glomero เคยอยู่กับ Zygo", "page": 3}, {"term": "Glomeromycota มีความสัมพันธ์สำคัญกับพืชแบบใด?", "answer": "Mycorrhizal symbiosis", "detail": "เป็นความสัมพันธ์ระหว่างราและรากพืชที่ช่วยการแลกเปลี่ยนสารอาหาร", "memo": "Myco = รา / Rhiza = ราก", "page": 3}, {"term": "Arbuscule คืออะไร?", "answer": "โครงสร้างแตกแขนงภายในรากพืชที่เกี่ยวข้องกับการแลกเปลี่ยนสารอาหาร โดยโน้ตเน้น phosphate", "detail": "รูปร่างแตกแขนงคล้ายต้นไม้จิ๋วภายใน root cortex", "memo": "Arbuscule = ต้นไม้จิ๋วในราก", "page": 3}, {"term": "คำว่า Mycorrhiza แปลจากรากศัพท์อย่างไร?", "answer": "myco = fungus + rhiza = root → รากรา", "detail": "เป็นคำที่บอกความสัมพันธ์ระหว่าง fungus กับ plant root โดยตรง", "memo": "Myco + Rhiza = รา + ราก", "page": 3}, {"term": "Current Fungal Tree (2022) ในโน้ตสรุปเป็นอย่างไร?", "answer": "มี 3 phyla เป็น Basal fungi และ 12 phyla เป็น Higher fungi ตามกรอบที่ไฟล์นำเสนอ", "detail": "โน้ตใช้แผนภาพสมัยใหม่เพื่อให้เห็นว่าระบบ classification ซับซ้อนกว่าระบบ 4 phyla แบบเก่า", "memo": "Old = 4 phyla / Current = tree ซับซ้อนขึ้น", "page": 3}, {"term": "Subkingdom Dikarya ใน current tree ของโน้ตประกอบด้วยอะไรบ้าง?", "answer": "Ascomycota, Basidiomycota และ Entorrhizomycota ตามแผนภาพที่โน้ตใช้", "detail": "ให้จำตาม source นี้โดยเฉพาะ เพราะการจัดวาง taxon สามารถเปลี่ยนได้ตามระบบและปีของแหล่งอ้างอิง", "memo": "Dikarya ในโน้ต current tree = Asco + Basidio + Entorrhizo", "page": 3}, {"term": "Mucoromycota และ Zoopagomycota ใน current framework เชื่อมกับลักษณะใด?", "answer": "Non-septate hyphae และการสร้าง zygospore ตามกรอบในโน้ต", "detail": "ทั้งสองเป็นกลุ่มที่ช่วยแทนภาพรวมของ Zygomycota แบบเก่าหลัง classification ถูกปรับใหม่", "memo": "Zygo แบบเก่าแตกสาย → Mucoro + Zoopago", "page": 3}, {"term": "ลักษณะสำคัญที่เปลี่ยนบน fungal tree ตามภาพในโน้ตมีอะไรบ้าง?", "answer": "มีการเน้น loss of flagellum และ presence of septum เป็นจุดเปลี่ยนสำคัญ", "detail": "การมอง character transition บน phylogenetic tree ช่วยเข้าใจว่า morphology บางอย่างเกิดหรือหายไปตามสายวิวัฒนาการ", "memo": "Tree story: มีหาง → เสียหาง → เริ่มมี septum → Dikarya", "page": 3}, {"term": "สรุปเปรียบเทียบ 4 Phyla แบบเก่าอย่างไรให้จำเร็ว?", "answer": "Chytrid = zoospore มีหาง ; Zygo = non-septate + zygospore ; Asco = septate + ascospore ; Basidio = septate + basidiospore", "detail": "นี่เป็น pattern หลักที่ใช้ตอบ choice classification ได้เร็ว", "memo": "Chy-หาง / Zy-ไร้ผนัง / As-ถุง / Ba-กระบอง", "page": 3}];
+let deck = [...original], idx = 0, known = 0, again = 0, query = "";
+const card = document.getElementById("card");
+
+function filteredIndices(){
+  const q=query.trim().toLowerCase();
+  if(!q) return deck.map((_,i)=>i);
+  return deck.map((c,i)=>({c,i})).filter(x => (x.c.term+" "+x.c.answer+" "+x.c.detail+" "+x.c.memo).toLowerCase().includes(q)).map(x=>x.i);
+}
+
+function renderList(){
+  const list=document.getElementById("list"); list.innerHTML="";
+  const inds=filteredIndices();
+  inds.forEach(i=>{
+    const c=deck[i];
+    const d=document.createElement("div");
+    d.className="item"+(i===idx?" active":"");
+    const t=document.createElement("div"); t.textContent=c.term;
+    const s=document.createElement("small"); s.textContent="p."+c.page;
+    d.append(t,s);
+    d.onclick=()=>{idx=i;render(); window.scrollTo({top:130,behavior:"smooth"});};
+    list.appendChild(d);
+  });
+}
+
+function render(){
+  if(idx<0) idx=deck.length-1;
+  if(idx>=deck.length) idx=0;
+  const c=deck[idx];
+  card.classList.remove("flipped");
+  document.getElementById("term").textContent=c.term;
+  document.getElementById("answer").textContent=c.answer;
+  document.getElementById("detail").textContent=c.detail;
+  document.getElementById("memo").textContent="🧠 วิธีจำ: "+c.memo;
+  document.getElementById("source").textContent="อ้างอิง: Notes Fungi P.1(1).pdf หน้า "+c.page;
+  document.getElementById("counter").textContent=(idx+1)+" / "+deck.length;
+  document.getElementById("score").textContent="จำได้ "+known+" · ทบทวน "+again;
+  document.getElementById("bar").style.width=((idx+1)/deck.length*100)+"%";
+  renderList();
+}
+function next(){idx=(idx+1)%deck.length;render()}
+function prev(){idx=(idx-1+deck.length)%deck.length;render()}
+
+card.onclick=()=>card.classList.toggle("flipped");
+document.getElementById("next").onclick=next;
+document.getElementById("prev").onclick=prev;
+document.getElementById("know").onclick=()=>{known++;next()};
+document.getElementById("again").onclick=()=>{again++;next()};
+document.getElementById("shuffle").onclick=()=>{deck.sort(()=>Math.random()-.5);idx=0;render()};
+document.getElementById("reset").onclick=()=>{deck=[...original];idx=0;known=0;again=0;document.getElementById("search").value="";query="";render()};
+document.getElementById("search").addEventListener("input",e=>{query=e.target.value;renderList()});
+document.addEventListener("keydown",e=>{
+  if(e.code==="Space" && document.activeElement.id!=="search"){e.preventDefault();card.classList.toggle("flipped")}
+  if(e.key==="ArrowRight")next();
+  if(e.key==="ArrowLeft")prev();
+});
+render();
+</script>
+</body>
+</html>

@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fungi Unit 3 — Slime Molds</title>
+<style>
+:root {
+  --bg:#f6f7fb; --card:#ffffff; --ink:#1f2937; --muted:#697386;
+  --blue:#4255ff; --blue2:#2e3856; --line:#e5e7eb; --green:#23b26d; --red:#ef5b5b;
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:Inter,"Noto Sans Thai",Tahoma,Arial,sans-serif;background:var(--bg);color:var(--ink)}
+.app{max-width:1220px;margin:auto;padding:18px 20px 42px}
+.topbar{display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap}
+.brand{font-size:22px;font-weight:850;color:var(--blue)} 
+.title{font-size:clamp(24px,4vw,38px);font-weight:850;margin:18px 0 8px}
+.sub{color:var(--muted);line-height:1.6}
+.tabs{display:flex;gap:18px;margin:22px 0 14px;border-bottom:1px solid var(--line)}
+.tab{padding:11px 2px;border-bottom:3px solid transparent;font-weight:750;color:#697386}
+.tab.active{color:var(--blue);border-color:var(--blue)}
+.studybar{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin:14px 0}
+.counter{font-weight:700;color:#475467} .actions{display:flex;gap:8px}
+.iconbtn{border:1px solid var(--line);background:#fff;border-radius:10px;padding:9px 12px;cursor:pointer}
+.progress{height:7px;background:#e9ecf4;border-radius:999px;overflow:hidden;margin-bottom:18px}
+.progress>div{height:100%;background:var(--blue);width:0;transition:.25s}
+.cardwrap{perspective:1400px;min-height:660px}
+.card{position:relative;min-height:660px;transform-style:preserve-3d;transition:transform .48s;cursor:pointer}
+.card.flipped{transform:rotateX(180deg)}
+.face{position:absolute;inset:0;backface-visibility:hidden;background:var(--card);border-radius:18px;box-shadow:0 10px 32px #10182812;border:1px solid #eaecf0;padding:34px 42px;display:flex;flex-direction:column;justify-content:center}
+.back{transform:rotateX(180deg)}
+.label{font-size:13px;text-transform:uppercase;letter-spacing:.08em;color:#98a2b3;font-weight:800;margin-bottom:18px}
+.term{font-size:clamp(28px,4vw,46px);font-weight:750;line-height:1.35}
+.answer{font-size:clamp(23px,3vw,34px);font-weight:800;line-height:1.45;color:var(--blue2)}
+.media{margin-top:16px;display:flex;justify-content:center}
+.media img{max-width:340px;max-height:220px;border:1px solid var(--line);border-radius:12px;background:#fff}
+.caption{text-align:center;color:#667085;font-size:12px;margin-top:8px}
+.detail{font-size:17px;line-height:1.75;color:#475467;margin-top:18px;max-width:960px}
+.memo{margin-top:18px;background:#f0f3ff;border-left:4px solid var(--blue);padding:12px 14px;border-radius:10px;color:#364152;line-height:1.6}
+.source{margin-top:18px;font-size:12px;color:#98a2b3}
+.hint{margin-top:auto;padding-top:24px;color:#98a2b3;font-size:13px}
+.nav{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:10px;margin-top:16px}
+.nav button{border:1px solid var(--line);background:#fff;border-radius:12px;padding:13px 10px;font:inherit;font-weight:750;cursor:pointer}
+#again{color:var(--red);border-color:#f7c7c7} #know{color:var(--green);border-color:#bce8d1}
+.sidebar{margin-top:26px;background:#fff;border:1px solid var(--line);border-radius:16px;padding:16px}
+.sidebar h3{margin:0 0 12px} .search{width:100%;padding:12px 13px;border:1px solid var(--line);border-radius:10px;font:inherit}
+.list{margin-top:12px;display:grid;gap:8px;max-height:420px;overflow:auto}
+.item{padding:11px 12px;border:1px solid var(--line);border-radius:10px;cursor:pointer;display:flex;justify-content:space-between;gap:10px}
+.item:hover{border-color:#aeb8ff;background:#fafbff} .item.active{border-color:var(--blue);background:#f4f6ff}
+.item small{color:#98a2b3;white-space:nowrap}
+.footer-note{margin-top:18px;color:#98a2b3;font-size:13px;line-height:1.55}
+@media(max-width:700px){
+  .face{padding:26px 22px} .cardwrap,.card{min-height:740px}
+  .nav{grid-template-columns:1fr 1fr}
+}
+</style>
+</head>
+<body>
+<div class="app">
+  <div class="topbar">
+    <div class="brand">Fungi Study</div>
+    <div class="actions">
+      <button class="iconbtn" id="shuffle">🔀 สุ่ม</button>
+      <button class="iconbtn" id="reset">↺ เริ่มใหม่</button>
+    </div>
+  </div>
+
+  <div class="title">Unit 3: Slime molds</div>
+  <div class="sub">Flashcards แบบละเอียด อิงจาก Notes Fungi P.1(1).pdf หน้า 4–5 • ใส่ภาพประกอบในข้อที่ “จำเป็นหรือช่วยเห็นภาพ” เช่น amoeboid cell, swarm cell, plasmodium, sorocarp, slug และ club root</div>
+
+  <div class="tabs">
+    <div class="tab active">Flashcards</div>
+    <div class="tab">Slime molds</div>
+  </div>
+
+  <div class="studybar">
+    <div class="counter" id="counter"></div>
+    <div id="score" class="counter">จำได้ 0 · ทบทวน 0</div>
+  </div>
+  <div class="progress"><div id="bar"></div></div>
+
+  <div class="cardwrap">
+    <div class="card" id="card">
+      <section class="face front">
+        <div class="label">TERM / QUESTION</div>
+        <div class="term" id="term"></div>
+        <div class="hint">คลิกการ์ด หรือกด Space เพื่อดูคำตอบ</div>
+      </section>
+      <section class="face back">
+        <div class="label">DEFINITION / ANSWER</div>
+        <div class="answer" id="answer"></div>
+        <div class="media" id="mediaWrap" style="display:none;">
+          <div>
+            <img id="img" alt="illustration">
+            <div class="caption" id="imgcap"></div>
+          </div>
+        </div>
+        <div class="detail" id="detail"></div>
+        <div class="memo" id="memo"></div>
+        <div class="source" id="source"></div>
+      </section>
+    </div>
+  </div>
+
+  <div class="nav">
+    <button id="prev">← ก่อนหน้า</button>
+    <button id="again">↻ ทบทวนอีก</button>
+    <button id="know">✓ จำได้</button>
+    <button id="next">ถัดไป →</button>
+  </div>
+
+  <div class="sidebar">
+    <h3>การ์ดทั้งหมดใน Unit 3</h3>
+    <input class="search" id="search" placeholder="ค้นหา เช่น plasmodium, Dictyostelium, club root...">
+    <div class="list" id="list"></div>
+  </div>
+
+  <div class="footer-note">หมายเหตุ: รอบนี้ผมใส่ “ภาพประกอบ” ลงในข้อที่ถ้าดูรูปแล้วเข้าใจเร็วขึ้น โดยใช้ภาพสเกตช์/diagram ภายในไฟล์ HTML เพื่อให้เปิดได้ทันทีไม่ต้องพึ่งโหลดจากเว็บภายนอก ถ้าคุณต้องการ เวอร์ชันถัดไปผมสามารถทำแบบใช้ “รูปถ่ายจริง” ของสิ่งมีชีวิตบางตัวแทนได้</div>
+</div>
+
+<script>
+const original = [{"term": "Slime molds เป็น True Fungi หรือไม่?", "answer": "ไม่ใช่ true fungi แต่เป็น fungal-like organisms ในกลุ่ม protists ตามโน้ต", "detail": "แม้รูปร่างหรือวงจรชีวิตบางช่วงจะคล้ายรา แต่ในเชิงอนุกรมวิธาน Slime molds ไม่ได้อยู่ใน Kingdom Fungi จริง ๆ", "memo": "หน้าตาเหมือนรา ≠ เป็นรา", "page": 4}, {"term": "Fungal-like organisms ใน Unit 3 ถูกแบ่งกว้าง ๆ เป็นอะไร?", "answer": "Kingdom Stramenopila และ Kingdom Protista", "detail": "ใน Unit 3 เน้นกลุ่ม slime molds ที่อยู่ฝั่ง protists ส่วน water molds จะไปต่อใน Unit 4", "memo": "Slime mold = protist side", "page": 4}, {"term": "Somatic forms หลักของ slime molds มีอะไรบ้าง?", "answer": "Amoeboid cell, Swarm cell และ Plasmodium", "detail": "โน้ตให้จำ 3 form นี้ให้ชัด เพราะข้อสอบชอบถามว่าเซลล์ใดเดี่ยว เซลล์ใดมี flagella และ form ใด multinucleate", "memo": "A-S-P = เดี่ยวเดิน, เดี่ยวว่าย, หลายหัวไหล", "page": 4}, {"term": "Amoeboid cell มีลักษณะอย่างไร?", "answer": "เป็น single cell, uninucleate และไม่มี flagella ใช้ pseudopodia ในการเคลื่อนที่และจับอาหาร", "detail": "เป็นระยะเซลล์เดี่ยวคล้ายอะมีบา จึงใช้การยื่นส่วนของเซลล์ออกมาเป็น pseudopodia", "memo": "Amoeboid = 1 nucleus + เท้าเทียม", "page": 4, "img": "data:image/svg+xml;utf8,%0A%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20width%3D%27340%27%20height%3D%27200%27%20viewBox%3D%270%200%20340%20200%27%3E%0A%3Crect%20width%3D%27100%25%27%20height%3D%27100%25%27%20fill%3D%27%23f9fafb%27/%3E%0A%3Cpath%20d%3D%27M65%2C105%20C45%2C70%2075%2C35%20125%2C40%20C160%2C20%20215%2C35%20235%2C70%20C285%2C90%20285%2C145%20230%2C160%20C210%2C185%20150%2C185%20115%2C160%20C70%2C165%2045%2C135%2065%2C105Z%27%20fill%3D%27%23ffd7a8%27%20stroke%3D%27%23d97706%27%20stroke-width%3D%274%27/%3E%0A%3Ccircle%20cx%3D%27155%27%20cy%3D%27102%27%20r%3D%2728%27%20fill%3D%27%23fef3c7%27%20stroke%3D%27%23b45309%27%20stroke-width%3D%273%27/%3E%0A%3Ccircle%20cx%3D%27155%27%20cy%3D%27102%27%20r%3D%2710%27%20fill%3D%27%23f59e0b%27/%3E%0A%3Ctext%20x%3D%2714%27%20y%3D%2722%27%20font-family%3D%27Arial%27%20font-size%3D%2716%27%20fill%3D%27%23374151%27%3EAmoeboid%20cell%3C/text%3E%0A%3Cline%20x1%3D%2785%27%20y1%3D%2754%27%20x2%3D%2740%27%20y2%3D%2728%27%20stroke%3D%27%236b7280%27%20stroke-width%3D%272%27/%3E%0A%3Ctext%20x%3D%2710%27%20y%3D%2728%27%20font-family%3D%27Arial%27%20font-size%3D%2713%27%20fill%3D%27%236b7280%27%3Epseudopodium%3C/text%3E%0A%3Cline%20x1%3D%27155%27%20y1%3D%2774%27%20x2%3D%27220%27%20y2%3D%2728%27%20stroke%3D%27%236b7280%27%20stroke-width%3D%272%27/%3E%0A%3Ctext%20x%3D%27225%27%20y%3D%2728%27%20font-family%3D%27Arial%27%20font-size%3D%2713%27%20fill%3D%27%236b7280%27%3Enucleus%3C/text%3E%0A%3C/svg%3E%0A", "imgcap": "ภาพสเกตช์ของ amoeboid cell พร้อม pseudopodium และ nucleus"}, {"term": "Swarm cell มีลักษณะอย่างไร?", "answer": "เป็น single cell, uninucleate และ biflagellate", "detail": "โน้ตระบุว่า swarm cell มักมีรูปร่างคล้าย comma และมี whiplash flagella 2 เส้น ใช้ในการว่ายน้ำ", "memo": "Swarm = swim", "page": 4, "img": "data:image/svg+xml;utf8,%0A%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20width%3D%27340%27%20height%3D%27200%27%20viewBox%3D%270%200%20340%20200%27%3E%0A%3Crect%20width%3D%27100%25%27%20height%3D%27100%25%27%20fill%3D%27%23f9fafb%27/%3E%0A%3Cpath%20d%3D%27M90%2C100%20C90%2C65%20135%2C58%20160%2C85%20C190%2C115%20165%2C145%20135%2C140%20C112%2C136%2090%2C122%2090%2C100Z%27%20fill%3D%27%23bfdbfe%27%20stroke%3D%27%232563eb%27%20stroke-width%3D%274%27/%3E%0A%3Ccircle%20cx%3D%27127%27%20cy%3D%27101%27%20r%3D%2718%27%20fill%3D%27%23dbeafe%27%20stroke%3D%27%231d4ed8%27%20stroke-width%3D%273%27/%3E%0A%3Cpath%20d%3D%27M165%2C82%20Q240%2C30%20295%2C55%27%20fill%3D%27none%27%20stroke%3D%27%230f172a%27%20stroke-width%3D%274%27%20stroke-linecap%3D%27round%27/%3E%0A%3Cpath%20d%3D%27M164%2C118%20Q248%2C165%20305%2C138%27%20fill%3D%27none%27%20stroke%3D%27%230f172a%27%20stroke-width%3D%274%27%20stroke-linecap%3D%27round%27/%3E%0A%3Ctext%20x%3D%2714%27%20y%3D%2722%27%20font-family%3D%27Arial%27%20font-size%3D%2716%27%20fill%3D%27%23374151%27%3ESwarm%20cell%20%28biflagellate%29%3C/text%3E%0A%3Ctext%20x%3D%27220%27%20y%3D%2740%27%20font-family%3D%27Arial%27%20font-size%3D%2713%27%20fill%3D%27%236b7280%27%3E2%20whiplash%20flagella%3C/text%3E%0A%3C/svg%3E%0A", "imgcap": "ภาพสเกตช์ของ swarm cell ที่มี 2 whiplash flagella"}, {"term": "Plasmodium คืออะไร?", "answer": "มวลเซลล์ multinucleate ที่มีไซโทพลาซึมต่อเนื่องและเคลื่อนที่ได้", "detail": "เกิดจาก zygote 2n แบ่งนิวเคลียสหลายครั้งโดยไม่แยกเป็นเซลล์ย่อย จึงเป็น true plasmodium", "memo": "Plasmodium = many nuclei in one flowing mass", "page": 4, "img": "data:image/svg+xml;utf8,%0A%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20width%3D%27340%27%20height%3D%27200%27%20viewBox%3D%270%200%20340%20200%27%3E%0A%3Crect%20width%3D%27100%25%27%20height%3D%27100%25%27%20fill%3D%27%23f9fafb%27/%3E%0A%3Cpath%20d%3D%27M28%2C108%20C42%2C78%2082%2C88%20103%2C69%20C126%2C48%20162%2C58%20177%2C84%20C204%2C55%20252%2C61%20261%2C95%20C290%2C93%20316%2C120%20302%2C146%20C288%2C172%20242%2C168%20225%2C151%20C202%2C175%20152%2C170%20135%2C145%20C98%2C160%2039%2C154%2028%2C108Z%27%20fill%3D%27%23fde047%27%20stroke%3D%27%23ca8a04%27%20stroke-width%3D%274%27/%3E%0A%3Cg%20fill%3D%27%23a16207%27%3E%0A%3Ccircle%20cx%3D%2780%27%20cy%3D%27108%27%20r%3D%277%27/%3E%3Ccircle%20cx%3D%27118%27%20cy%3D%2789%27%20r%3D%276%27/%3E%3Ccircle%20cx%3D%27165%27%20cy%3D%27117%27%20r%3D%277%27/%3E%3Ccircle%20cx%3D%27210%27%20cy%3D%27102%27%20r%3D%276%27/%3E%3Ccircle%20cx%3D%27245%27%20cy%3D%27128%27%20r%3D%277%27/%3E%3Ccircle%20cx%3D%27140%27%20cy%3D%27136%27%20r%3D%276%27/%3E%0A%3C/g%3E%0A%3Cpath%20d%3D%27M60%2C106%20C110%2C95%20140%2C110%20172%2C98%20C210%2C82%20240%2C102%20280%2C109%27%20fill%3D%27none%27%20stroke%3D%27%2392400e%27%20stroke-width%3D%273%27%20stroke-dasharray%3D%277%206%27/%3E%0A%3Ctext%20x%3D%2714%27%20y%3D%2722%27%20font-family%3D%27Arial%27%20font-size%3D%2716%27%20fill%3D%27%23374151%27%3EPlasmodium%20%28multinucleate%29%3C/text%3E%0A%3Ctext%20x%3D%2714%27%20y%3D%27182%27%20font-family%3D%27Arial%27%20font-size%3D%2713%27%20fill%3D%27%236b7280%27%3Edashed%20line%20%3D%20cytoplasmic%20streaming%20vein%3C/text%3E%0A%3C/svg%3E%0A", "imgcap": "ภาพสเกตช์ของ plasmodium ที่มีหลายนิวเคลียสและเส้นทาง cytoplasmic streaming"}, {"term": "Myxomycota คือ slime mold แบบใด?", "answer": "True slime molds", "detail": "จุดเด่นคือมี true plasmodium เป็นระยะเด่น คือเป็นมวล multinucleate ต่อเนื่องจริง ๆ ไม่ใช่เพียงการรวมตัวของหลายเซลล์", "memo": "Myxo = เมือกจริง", "page": 4}, {"term": "Plasmodium ของ Myxomycota เคลื่อนที่อย่างไร?", "answer": "เคลื่อนที่ด้วย cytoplasmic streaming แบบ pulsating", "detail": "ภายใน plasmodium จะมีการไหลของไซโทพลาซึมกลับไปกลับมา และมีเส้นหลักเรียกว่า vein", "memo": "ไหลเป็นจังหวะ = pulsating streaming", "page": 4}, {"term": "Vein ใน plasmodium มีความสำคัญอย่างไร?", "answer": "เป็นเส้นทางหลักที่ช่วยการไหลของไซโทพลาซึมและการส่งสัญญาณในมวล plasmodium", "detail": "ใน Physarum polycephalum เส้น vein สีเข้มเป็นลักษณะเด่นมากและมีบทบาทในการจัดเส้นทางหาอาหาร", "memo": "vein = ทางด่วนใน slime mold", "page": 4}, {"term": "วงจรใหญ่ของ Myxomycota เริ่มจากอะไรและจบที่อะไร?", "answer": "เริ่มจาก spore และกลับไปเป็น spore อีกครั้ง", "detail": "ระหว่างทางจะมี amoeboid/swarm cell → mating → zygote → plasmodium → sorocarp/sporangium → spore", "memo": "สปอร์งอก–รวม–ไหล–ตั้งเสา–ปล่อยสปอร์", "page": 4}, {"term": "Amoeboid cell ของ Myxomycota กินอาหารอย่างไร?", "answer": "ใช้ pseudopodia engulf อาหาร", "detail": "เพราะไม่มี cell wall แข็งแบบ true fungi จึงสามารถจับและกลืนอาหารได้แบบ phagocytosis", "memo": "ยื่นเท้าเทียมไปกอดอาหาร", "page": 4}, {"term": "Swarm cell ของ Myxomycota มี flagella แบบใด?", "answer": "มี 2 whiplash flagella", "detail": "เป็นระยะที่ว่ายน้ำได้และยังคงเป็น uninucleate cell", "memo": "swarm = 2 แส้", "page": 4}, {"term": "Plasmogamy และ Karyogamy ใน Myxomycota ทำให้เกิดอะไร?", "answer": "เกิด zygote 2n", "detail": "หลังจาก mating ของ cell ที่เข้าคู่กัน cytoplasm และ nuclei จะรวมกัน จากนั้น zygote จะพัฒนาเป็น plasmodium", "memo": "แต่งงานแล้วได้ 2n", "page": 4}, {"term": "Sclerotium คืออะไร?", "answer": "เป็น resting stage ของ plasmodium ที่ช่วยทนสภาพไม่เหมาะ", "detail": "เมื่อสภาพแห้งแล้งและอาหารน้อย plasmodium จะเปลี่ยนเป็น sclerotium ซึ่งมีลักษณะหยุดพักและทนทานกว่า", "memo": "Sclero = แข็งเพื่อรอด", "page": 4}, {"term": "เงื่อนไขใดทำให้ Plasmodium → Sclerotium?", "answer": "สภาพแห้งแล้งและขาดสารอาหาร", "detail": "เป็นการเปลี่ยนเข้าสู่ระยะพักเพื่อเอาตัวรอด", "memo": "แห้ง + หิว = พัก", "page": 4}, {"term": "เงื่อนไขใดทำให้ Sclerotium → Plasmodium?", "answer": "สภาพชื้น มืด และประมาณ 25°C ตามโน้ต", "detail": "เมื่อสิ่งแวดล้อมเหมาะสม มวลที่พักอยู่สามารถกลับมามีชีวิตและเคลื่อนที่ได้อีก", "memo": "ชื้น + มืด + 25°C = ฟื้น", "page": 4}, {"term": "Sorocarp คืออะไร?", "answer": "Fruiting body ของ slime mold ที่เกี่ยวข้องกับการสร้าง spore", "detail": "ใน Myxomycota ช่วงที่ plasmodium เข้าสู่การสร้างโครงสร้างสืบพันธุ์จะเห็นก้านและส่วนสร้างสปอร์ชัดเจน", "memo": "Soro = กอง/กลุ่ม + carp = fruit", "page": 4, "img": "data:image/svg+xml;utf8,%0A%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20width%3D%27340%27%20height%3D%27220%27%20viewBox%3D%270%200%20340%20220%27%3E%0A%3Crect%20width%3D%27100%25%27%20height%3D%27100%25%27%20fill%3D%27%23f9fafb%27/%3E%0A%3Crect%20x%3D%2740%27%20y%3D%27170%27%20width%3D%27260%27%20height%3D%2710%27%20rx%3D%273%27%20fill%3D%27%239ca3af%27/%3E%0A%3Crect%20x%3D%27164%27%20y%3D%2788%27%20width%3D%2712%27%20height%3D%2782%27%20fill%3D%27%23a16207%27/%3E%0A%3Cellipse%20cx%3D%27170%27%20cy%3D%2772%27%20rx%3D%2752%27%20ry%3D%2746%27%20fill%3D%27%23f59e0b%27%20stroke%3D%27%2392400e%27%20stroke-width%3D%274%27/%3E%0A%3Cpath%20d%3D%27M136%2052%20Q170%2092%20205%2054%27%20fill%3D%27none%27%20stroke%3D%27%2378350f%27%20stroke-width%3D%273%27/%3E%0A%3Cpath%20d%3D%27M146%2088%20Q171%2047%20196%2086%27%20fill%3D%27none%27%20stroke%3D%27%2378350f%27%20stroke-width%3D%273%27/%3E%0A%3Ctext%20x%3D%2714%27%20y%3D%2722%27%20font-family%3D%27Arial%27%20font-size%3D%2716%27%20fill%3D%27%23374151%27%3ESorocarp%20/%20Sporangium%3C/text%3E%0A%3Cline%20x1%3D%27170%27%20y1%3D%27170%27%20x2%3D%27170%27%20y2%3D%27202%27%20stroke%3D%27%236b7280%27%20stroke-width%3D%272%27/%3E%3Ctext%20x%3D%27180%27%20y%3D%27202%27%20font-family%3D%27Arial%27%20font-size%3D%2713%27%20fill%3D%27%236b7280%27%3Estalk%3C/text%3E%0A%3Cline%20x1%3D%27222%27%20y1%3D%2772%27%20x2%3D%27300%27%20y2%3D%2756%27%20stroke%3D%27%236b7280%27%20stroke-width%3D%272%27/%3E%3Ctext%20x%3D%27245%27%20y%3D%2752%27%20font-family%3D%27Arial%27%20font-size%3D%2713%27%20fill%3D%27%236b7280%27%3Esporangium%3C/text%3E%0A%3Cline%20x1%3D%2792%27%20y1%3D%27174%27%20x2%3D%2726%27%20y2%3D%27194%27%20stroke%3D%27%236b7280%27%20stroke-width%3D%272%27/%3E%3Ctext%20x%3D%2712%27%20y%3D%27206%27%20font-family%3D%27Arial%27%20font-size%3D%2713%27%20fill%3D%27%236b7280%27%3Ehypothallus%3C/text%3E%0A%3C/svg%3E%0A", "imgcap": "ภาพสเกตช์ของ sorocarp/sporangium แสดง stalk, sporangium และ hypothallus"}, {"term": "Sorocarp / Fruiting body ของ slime mold มีส่วนประกอบใดบ้าง?", "answer": "Peridium, Hypothallus, Stalk, Sporangium และ Capillitium", "detail": "ข้อสอบชอบถามชื่อส่วนประกอบของ fruiting body หรือให้ภาพแล้วถาม label", "memo": "ฐาน–ก้าน–ถุง–เยื่อ–เส้นในถุง", "page": 4}, {"term": "Physarum polycephalum เป็นตัวอย่างสำคัญของอะไร?", "answer": "เป็นตัวอย่างสำคัญของ true slime mold (Myxomycota)", "detail": "ในโน้ตใช้เป็นตัวแทนเพื่ออธิบาย plasmodium, vein และบริเวณ anterior margin ที่กางออกคล้ายพัด", "memo": "Physarum = เมือกเหลืองมี vein เหมือนแผนที่", "page": 5, "img": "data:image/svg+xml;utf8,%0A%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20width%3D%27340%27%20height%3D%27200%27%20viewBox%3D%270%200%20340%20200%27%3E%0A%3Crect%20width%3D%27100%25%27%20height%3D%27100%25%27%20fill%3D%27%23f9fafb%27/%3E%0A%3Cpath%20d%3D%27M28%2C108%20C42%2C78%2082%2C88%20103%2C69%20C126%2C48%20162%2C58%20177%2C84%20C204%2C55%20252%2C61%20261%2C95%20C290%2C93%20316%2C120%20302%2C146%20C288%2C172%20242%2C168%20225%2C151%20C202%2C175%20152%2C170%20135%2C145%20C98%2C160%2039%2C154%2028%2C108Z%27%20fill%3D%27%23fde047%27%20stroke%3D%27%23ca8a04%27%20stroke-width%3D%274%27/%3E%0A%3Cg%20fill%3D%27%23a16207%27%3E%0A%3Ccircle%20cx%3D%2780%27%20cy%3D%27108%27%20r%3D%277%27/%3E%3Ccircle%20cx%3D%27118%27%20cy%3D%2789%27%20r%3D%276%27/%3E%3Ccircle%20cx%3D%27165%27%20cy%3D%27117%27%20r%3D%277%27/%3E%3Ccircle%20cx%3D%27210%27%20cy%3D%27102%27%20r%3D%276%27/%3E%3Ccircle%20cx%3D%27245%27%20cy%3D%27128%27%20r%3D%277%27/%3E%3Ccircle%20cx%3D%27140%27%20cy%3D%27136%27%20r%3D%276%27/%3E%0A%3C/g%3E%0A%3Cpath%20d%3D%27M60%2C106%20C110%2C95%20140%2C110%20172%2C98%20C210%2C82%20240%2C102%20280%2C109%27%20fill%3D%27none%27%20stroke%3D%27%2392400e%27%20stroke-width%3D%273%27%20stroke-dasharray%3D%277%206%27/%3E%0A%3Ctext%20x%3D%2714%27%20y%3D%2722%27%20font-family%3D%27Arial%27%20font-size%3D%2716%27%20fill%3D%27%23374151%27%3EPlasmodium%20%28multinucleate%29%3C/text%3E%0A%3Ctext%20x%3D%2714%27%20y%3D%27182%27%20font-family%3D%27Arial%27%20font-size%3D%2713%27%20fill%3D%27%236b7280%27%3Edashed%20line%20%3D%20cytoplasmic%20streaming%20vein%3C/text%3E%0A%3C/svg%3E%0A", "imgcap": "ภาพสเกตช์แทน plasmodium ของ Physarum polycephalum"}, {"term": "Acrasiomycota คือ slime mold แบบใด?", "answer": "Cellular slime mold", "detail": "ต่างจาก Myxomycota เพราะไม่มี true plasmodium แต่มีการรวมตัวของ amoeboid cells เป็น pseudoplasmodium", "memo": "Acrasi = cellular slime mold", "page": 5}, {"term": "Pseudoplasmodium คืออะไร?", "answer": "การรวมตัวของ amoeboid cells หลายเซลล์เข้าด้วยกันโดยแต่ละเซลล์ยังไม่หลอมรวมเป็นมวลเดียว", "detail": "จึงต่างจาก true plasmodium ที่เป็น multinucleate continuous mass", "memo": "Pseudo = รวมกันแต่ยังไม่ fusion", "page": 5}, {"term": "Acrasiomycota มี pseudopodium แบบใด และตอบสนองต่อสารใด?", "answer": "มี lobose pseudopodia และตอบสนองต่อ Acrasin", "detail": "จุดนี้ช่วยแยกจาก Dictyosteliomycota ซึ่งใช้ cAMP และมี filose pseudopodia", "memo": "A = Acrasin + Amoeba ปลายมน", "page": 5}, {"term": "Dictyosteliomycota คือ slime mold แบบใด?", "answer": "Cellular slime mold ที่ใช้ cAMP ในการ aggregation", "detail": "ตัวแทนสำคัญคือ Dictyostelium discoideum ซึ่งเป็น model organism ที่ใช้ศึกษา multicellularity", "memo": "Dictyo = cAMP เรียกเพื่อน", "page": 5}, {"term": "Dictyosteliomycota มี pseudopodium แบบใด?", "answer": "Filose pseudopodia", "detail": "filose = ปลายเรียวแหลม ช่วยจำให้ต่างจาก lobose ของ Acrasiomycota", "memo": "D = ดินสอแหลม (filose)", "page": 5}, {"term": "สารใดดึงดูดการ aggregation ของ Dictyostelium?", "answer": "cAMP", "detail": "เมื่ออาหารหมด amoeboid cells จะปล่อย cAMP เป็น chemotactic signal ทำให้เซลล์อื่นเคลื่อนเข้าหากัน", "memo": "หิว → cAMP เรียกเพื่อน", "page": 5}, {"term": "ลำดับ multicellular stages ของ Dictyostelium คืออะไร?", "answer": "Amoeboid feeding → starvation → aggregation → mound → slug → stalk/fruiting body → spores", "detail": "นี่เป็นลำดับสำคัญมากของ cellular slime mold และข้อสอบชอบถามเรียงขั้น", "memo": "กิน–หิว–เรียก–กอง–คลาน–ตั้งเสา–ปล่อยสปอร์", "page": 5}, {"term": "Slug ของ Dictyostelium คืออะไร?", "answer": "ระยะ multicellular motile mass ที่เกิดหลัง mound และสามารถเคลื่อนที่ได้", "detail": "slug ประกอบด้วยเซลล์จำนวนมากที่ยังแยกกันเป็นหน่วย แต่ประสานการเคลื่อนที่ร่วมกัน", "memo": "slug = ก้อนเซลล์ที่คลานได้", "page": 5, "img": "data:image/svg+xml;utf8,%0A%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20width%3D%27340%27%20height%3D%27200%27%20viewBox%3D%270%200%20340%20200%27%3E%0A%3Crect%20width%3D%27100%25%27%20height%3D%27100%25%27%20fill%3D%27%23f9fafb%27/%3E%0A%3Cpath%20d%3D%27M36%2C110%20C42%2C74%2086%2C64%20120%2C71%20C155%2C78%20190%2C66%20222%2C73%20C266%2C82%20300%2C98%20308%2C121%20C314%2C140%20277%2C144%20242%2C141%20C208%2C139%20176%2C149%20132%2C145%20C84%2C142%2028%2C138%2036%2C110Z%27%20fill%3D%27%23c7d2fe%27%20stroke%3D%27%234f46e5%27%20stroke-width%3D%274%27/%3E%0A%3Ccircle%20cx%3D%2772%27%20cy%3D%27106%27%20r%3D%274%27%20fill%3D%27%233730a3%27/%3E%3Ccircle%20cx%3D%2796%27%20cy%3D%2797%27%20r%3D%274%27%20fill%3D%27%233730a3%27/%3E%3Ccircle%20cx%3D%27126%27%20cy%3D%27112%27%20r%3D%274%27%20fill%3D%27%233730a3%27/%3E%3Ccircle%20cx%3D%27162%27%20cy%3D%27100%27%20r%3D%274%27%20fill%3D%27%233730a3%27/%3E%3Ccircle%20cx%3D%27202%27%20cy%3D%27109%27%20r%3D%274%27%20fill%3D%27%233730a3%27/%3E%0A%3Ctext%20x%3D%2714%27%20y%3D%2722%27%20font-family%3D%27Arial%27%20font-size%3D%2716%27%20fill%3D%27%23374151%27%3EDictyostelium%20slug%3C/text%3E%0A%3Ctext%20x%3D%2714%27%20y%3D%27180%27%20font-family%3D%27Arial%27%20font-size%3D%2713%27%20fill%3D%27%236b7280%27%3Emany%20amoeboid%20cells%20migrating%20together%3C/text%3E%0A%3C/svg%3E%0A", "imgcap": "ภาพสเกตช์ของ Dictyostelium slug ซึ่งเป็นมวลเซลล์เคลื่อนที่ร่วมกัน"}, {"term": "Slug ของ Dictyostelium หนีอะไร และเข้าหาอะไร?", "answer": "หนี ammonia แต่เข้าหา heat, light และ oxygen", "detail": "พฤติกรรมนี้ช่วยให้ slug ไปสู่สภาพแวดล้อมที่เหมาะต่อการสร้าง fruiting body", "memo": "หนี NH₃ แต่ชอบ แสง–อากาศ–อุ่น", "page": 5}, {"term": "Stalk cells ของ Dictyosteliomycota เป็นอย่างไร?", "answer": "เป็น dead cells และไม่ germinate", "detail": "ถือเป็นการเสียสละของบางเซลล์เพื่อช่วยให้เซลล์สปอร์อยู่สูงขึ้นและกระจายได้ดีขึ้น", "memo": "เซลล์ก้าน = เสียสละ", "page": 5}, {"term": "Acrasiomycota ต่างจาก Dictyosteliomycota อย่างไรแบบสั้นที่สุด?", "answer": "Acrasiomycota ใช้ Acrasin และมี lobose pseudopodia; Dictyosteliomycota ใช้ cAMP และมี filose pseudopodia", "detail": "โน้ตยังแยกว่าบาง Acrasiomycota มี flagellate stage แต่ Dictyosteliomycota ไม่มี", "memo": "A = Acrasin + lobose / D = cAMP + filose", "page": 5}, {"term": "Plasmodiophoromycota คืออะไร?", "answer": "Endoparasitic slime molds ที่ต้องมีช่วงหนึ่งอยู่ภายใน host cells", "detail": "เป็นกลุ่มปรสิตในพืช และมีความสำคัญทางโรคพืช", "memo": "Plasmodio- = ปรสิตใน host", "page": 5}, {"term": "Plasmodiophora brassicae ก่อโรคอะไร?", "answer": "Club root disease ในพืชตระกูลกะหล่ำ", "detail": "ทำให้รากบวมผิดรูปเป็นลักษณะคล้ายกระบองหรือปุ่มพอง", "memo": "Brassica → club root", "page": 5, "img": "data:image/svg+xml;utf8,%0A%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20width%3D%27340%27%20height%3D%27220%27%20viewBox%3D%270%200%20340%20220%27%3E%0A%3Crect%20width%3D%27100%25%27%20height%3D%27100%25%27%20fill%3D%27%23f9fafb%27/%3E%0A%3Cpath%20d%3D%27M170%2020%20L170%2095%27%20stroke%3D%27%2316a34a%27%20stroke-width%3D%278%27%20stroke-linecap%3D%27round%27/%3E%0A%3Cpath%20d%3D%27M170%2045%20C130%2030%2098%2028%2070%2038%27%20stroke%3D%27%2322c55e%27%20stroke-width%3D%276%27%20stroke-linecap%3D%27round%27/%3E%0A%3Cpath%20d%3D%27M170%2065%20C210%2050%20248%2048%20280%2060%27%20stroke%3D%27%2322c55e%27%20stroke-width%3D%276%27%20stroke-linecap%3D%27round%27/%3E%0A%3Cpath%20d%3D%27M170%2095%20C160%20112%20160%20132%20163%20145%27%20stroke%3D%27%2392400e%27%20stroke-width%3D%277%27/%3E%0A%3Cpath%20d%3D%27M163%20145%20C120%20130%20104%20178%20135%20186%20C147%20202%20180%20201%20192%20184%20C230%20185%20238%20140%20200%20139%20C195%20122%20180%20114%20163%20145Z%27%20fill%3D%27%23d97706%27%20opacity%3D%270.75%27%20stroke%3D%27%2392400e%27%20stroke-width%3D%274%27/%3E%0A%3Ctext%20x%3D%2714%27%20y%3D%2722%27%20font-family%3D%27Arial%27%20font-size%3D%2716%27%20fill%3D%27%23374151%27%3EClub%20root%20disease%3C/text%3E%0A%3Ctext%20x%3D%2714%27%20y%3D%27200%27%20font-family%3D%27Arial%27%20font-size%3D%2713%27%20fill%3D%27%236b7280%27%3Eswollen%20root%20caused%20by%20Plasmodiophora%20brassicae%3C/text%3E%0A%3C/svg%3E%0A", "imgcap": "ภาพสเกตช์ของรากที่บวมแบบ club root"}, {"term": "ลำดับ infection ของ Plasmodiophora brassicae แบบย่อคืออะไร?", "answer": "Biflagellate zoospore → encyst ที่ root hair → host invasion → plasmodium → multinucleate stage → root swelling → resting spores", "detail": "ข้อสอบอาจถามทั้ง host, ระยะ infective และผลที่เกิดกับราก", "memo": "ว่าย–เกาะ–บุกรุก–พอง–พัก", "page": 5}, {"term": "เปรียบเทียบ True plasmodium กับ Pseudoplasmodium", "answer": "True plasmodium เป็นมวลไซโทพลาซึมต่อเนื่องหลายนิวเคลียส ส่วน pseudoplasmodium เป็นการรวมตัวของหลายเซลล์ที่ยังแยกเป็นหน่วย", "detail": "นี่เป็นจุดแยกสำคัญระหว่าง Myxomycota กับ cellular slime molds", "memo": "True = fuse จริง / Pseudo = แค่จับกลุ่ม", "page": 5}];
+let deck = [...original], idx = 0, known = 0, again = 0, query = "";
+const card = document.getElementById("card");
+
+function filteredIndices(){
+  const q=query.trim().toLowerCase();
+  if(!q) return deck.map((_,i)=>i);
+  return deck.map((c,i)=>({c,i})).filter(x => (x.c.term+" "+x.c.answer+" "+x.c.detail+" "+x.c.memo).toLowerCase().includes(q)).map(x=>x.i);
+}
+
+function renderList(){
+  const list=document.getElementById("list"); list.innerHTML="";
+  const inds=filteredIndices();
+  inds.forEach(i=>{
+    const c=deck[i];
+    const d=document.createElement("div");
+    d.className="item"+(i===idx?" active":"");
+    const t=document.createElement("div"); t.textContent=c.term;
+    const s=document.createElement("small"); s.textContent="p."+c.page;
+    d.append(t,s);
+    d.onclick=()=>{idx=i;render(); window.scrollTo({top:130,behavior:"smooth"});};
+    list.appendChild(d);
+  });
+}
+
+function render(){
+  if(idx<0) idx=deck.length-1;
+  if(idx>=deck.length) idx=0;
+  const c=deck[idx];
+  card.classList.remove("flipped");
+  document.getElementById("term").textContent=c.term;
+  document.getElementById("answer").textContent=c.answer;
+  document.getElementById("detail").textContent=c.detail;
+  document.getElementById("memo").textContent="🧠 วิธีจำ: "+c.memo;
+  document.getElementById("source").textContent="อ้างอิง: Notes Fungi P.1(1).pdf หน้า "+c.page;
+  const media=document.getElementById("mediaWrap");
+  if(c.img){
+    media.style.display="flex";
+    document.getElementById("img").src=c.img;
+    document.getElementById("imgcap").textContent=c.imgcap || "";
+  } else {
+    media.style.display="none";
+    document.getElementById("img").removeAttribute("src");
+    document.getElementById("imgcap").textContent="";
+  }
+  document.getElementById("counter").textContent=(idx+1)+" / "+deck.length;
+  document.getElementById("score").textContent="จำได้ "+known+" · ทบทวน "+again;
+  document.getElementById("bar").style.width=((idx+1)/deck.length*100)+"%";
+  renderList();
+}
+function next(){idx=(idx+1)%deck.length;render()}
+function prev(){idx=(idx-1+deck.length)%deck.length;render()}
+
+card.onclick=()=>card.classList.toggle("flipped");
+document.getElementById("next").onclick=next;
+document.getElementById("prev").onclick=prev;
+document.getElementById("know").onclick=()=>{known++;next()};
+document.getElementById("again").onclick=()=>{again++;next()};
+document.getElementById("shuffle").onclick=()=>{deck.sort(()=>Math.random()-.5);idx=0;render()};
+document.getElementById("reset").onclick=()=>{deck=[...original];idx=0;known=0;again=0;document.getElementById("search").value="";query="";render()};
+document.getElementById("search").addEventListener("input",e=>{query=e.target.value;renderList()});
+document.addEventListener("keydown",e=>{
+  if(e.code==="Space" && document.activeElement.id!=="search"){e.preventDefault();card.classList.toggle("flipped")}
+  if(e.key==="ArrowRight")next();
+  if(e.key==="ArrowLeft")prev();
+});
+render();
+</script>
+</body>
+</html>
