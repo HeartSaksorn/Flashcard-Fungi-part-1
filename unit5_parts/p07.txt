@@ -1,0 +1,63 @@
+l": "ถ้าตอบเป็นภาพให้ใส่ suspensors และ mating types เพื่อให้ครบ concept", "memo": "เจอคู่–รวม cytoplasm–zygospore–รวม nucleus–งอก–ถุงสปอร์", "source": "Notes Unit 5; old midterm", "exam": true, "front_img": "", "back_img": "", "imgcap": "Mucorales life-cycle diagram", "ety": "", "steps": [], "note": ""}, {"id": 150, "cat": "13 · 🎯 Old-exam / High-yield", "term": "ถ้าข้อสอบให้ภาพ 'ลูกกลมใหญ่บนก้าน ไม่มี rhizoid เด่น' ควรนึกถึง genus ใด?", "answer": "Mucor", "detail": "จุดแยกจาก Rhizopus คือ Rhizopus มี rhizoids/stolons ชัด", "memo": "ไม่เห็นราก → Mucor ก่อน", "source": "7.pdf p.2-5; old midterm", "exam": true, "front_img": "", "back_img": "", "imgcap": "", "ety": "", "steps": [], "note": ""}, {"id": 151, "cat": "13 · 🎯 Old-exam / High-yield", "term": "ถ้าข้อสอบให้ภาพ 'ก้านชู sporangium มี rhizoid ด้านล่าง' ควรนึกถึง genus ใด?", "answer": "Rhizopus", "detail": "Rhizoid เป็น character เด่นของ genus ในภาพ lab", "memo": "เห็นราก → Rhizopus", "source": "7.pdf p.6-7; old midterm", "exam": true, "front_img": "", "back_img": "", "imgcap": "", "ety": "", "steps": [], "note": ""}, {"id": 152, "cat": "13 · 🎯 Old-exam / High-yield", "term": "ถ้าข้อสอบให้ภาพ 'แท่ง merosporangia เรียงรัศมีรอบ vesicle' ควรตอบอะไร?", "answer": "Syncephalastrum / Family Synephalastraceae", "detail": "เป็น morphology ที่จำเพาะและถามภาพได้ง่าย", "memo": "ดอกทานตะวัน = Syncephalastrum", "source": "7.pdf p.9-10; old midterm", "exam": true, "front_img": "", "back_img": "", "imgcap": "Syncephalastrum / merosporangia", "ety": "", "steps": [], "note": ""}, {"id": 153, "cat": "13 · 🎯 Old-exam / High-yield", "term": "ถ้าข้อสอบถาม fungus shotgun ควรตอบอะไร?", "answer": "Pilobolus — dung fungus ที่ใช้ subsporangial vesicle รับแสงและสร้างแรงดันเพื่อ forcibly discharge sporangium", "detail": "ยิงได้ประมาณ 2 m ตาม lecture bullet", "memo": "Shotgun = Pilobolus", "source": "7.pdf p.14", "exam": true, "front_img": "", "back_img": "", "imgcap": "", "ety": "", "steps": [], "note": ""}, {"id": 154, "cat": "13 · 🎯 Old-exam / High-yield", "term": "ถ้าข้อสอบถาม insect pathogen ที่ใช้ biological control ควรนึก order ใดใน Unit 5?", "answer": "Entomophthorales", "detail": "จุดเด่นคือ host specificity และ rapid killing", "memo": "Entomo = insect biocontrol", "source": "7.pdf p.17", "exam": true, "front_img": "", "back_img": "", "imgcap": "", "ety": "", "steps": [], "note": ""}, {"id": 155, "cat": "13 · 🎯 Old-exam / High-yield", "term": "ถ้าข้อสอบถาม predator ที่ใช้ sticky mycelium จับ amoeba/nematode ควรตอบ order ใด?", "answer": "Zoopagales", "detail": "Sticky mycelium ดักเหยื่อแล้ว hyphae invade", "memo": "Zoo-paga = จับสัตว์เล็ก", "source": "7.pdf p.21", "exam": true, "front_img": "", "back_img": "", "imgcap": "", "ety": "", "steps": [], "note": ""}, {"id": 156, "cat": "13 · 🎯 Old-exam / High-yield", "term": "ถ้าข้อสอบถาม true fungi phylum ที่มี motile zoospore ควรตอบอะไร?", "answer": "Chytridiomycota", "detail": "เป็น phylum ใน true fungi ที่ lecture เน้นว่า produce motile cells ใน life cycle", "memo": "True fungi + motile = Chytrid", "source": "5.pdf p.63", "exam": true, "front_img": "", "back_img": "", "imgcap": "", "ety": "", "steps": [], "note": ""}, {"id": 157, "cat": "13 · 🎯 Old-exam / High-yield", "term": "ถ้าข้อสอบให้คู่ 'Sirenin / Parisin' ต้องจับอย่างไร?", "answer": "Female Allomyces → Sirenin; Male gametes → Parisin", "detail": "เป็น pheromone pair ของ Allomyces", "memo": "Sirenin ฝั่ง female / Parisin ฝั่ง male", "source": "5.pdf p.70", "exam": true, "front_img": "", "back_img": "", "imgcap": "", "ety": "", "steps": [], "note": ""}, {"id": 158, "cat": "13 · 🎯 Old-exam / High-yield", "term": "ถ้าข้อสอบให้ภาพ sporangium 'ผนังหนา มี pigment' ของ Allomyces ตอบอะไร?", "answer": "Meiosporangium", "detail": "Contrast: mitosporangium thin-walled, elongate, colorless", "memo": "หนาเข้ม = Meio", "source": "5.pdf p.68,71", "exam": true, "front_img": "", "back_img": "", "imgcap": "Allomyces meiosporangia", "ety": "", "steps": [], "note": ""}, {"id": 159, "cat": "13 · 🎯 Old-exam / High-yield", "term": "ถ้าข้อสอบถาม operculate vs inoperculate ใน Chytridiales ตอบอย่างไร?", "answer": "Chytriomyces = operculate; Synchytrium = inoperculate", "detail": "ภาพฝาปิดช่วยจำได้เร็ว", "memo": "Chytrio มีฝา / Syn ไม่มีฝา", "source": "5.pdf p.76,78", "exam": true, "front_img": "", "back_img": "", "imgcap": "", "ety": "", "steps": [], "note": ""}, {"id": 160, "cat": "13 · 🎯 Old-exam / High-yield", "term": "สรุป Unit 5 เป็นเส้นเรื่องเดียว", "answer": "Chytrid = ราแท้มีหาง → Allomyces สลับ gametothallus/sporothallus → Synchytrium wart/Chytriomyces ฝา → Zygomycota ไม่มีหาง สร้าง sporangiospore + zygospore → Mucorales ถุงสปอร์หลากรูป → Mucor/Rhizopus/Syncephalastrum → Pilobolus ยิง → Entomophthorales ฆ่าแมลง → Zoopagales จับสัตว์เล็ก → Trichomycetes อยู่ใน gut", "detail": "ใช้เป็น mental map ก่อนท่องรายละเอียด", "memo": "มีหาง → ไม่มีหาง → ถุงสปอร์ → ยิง/จับ/อยู่ใน gut", "source": "สรุปจาก Unit 5", "exam": false, "front_img": "", "back_img": "", "imgcap": "", "ety": "", "steps": [], "note": ""}];
+let deck=[...original], view=[...deck], idx=0, examOnly=false, starOnly=false;
+const known=new Set(JSON.parse(localStorage.getItem('u5known')||'[]'));
+const review=new Set(JSON.parse(localStorage.getItem('u5review')||'[]'));
+const stars=new Set(JSON.parse(localStorage.getItem('u5stars')||'[]'));
+const $=id=>document.getElementById(id);
+const cats=['ทั้งหมด',...new Set(original.map(c=>c.cat))];
+cats.forEach(x=>{let o=document.createElement('option');o.value=x;o.textContent=x;$('cat').appendChild(o)});
+
+function apply(){
+ const q=$('search').value.trim().toLowerCase(), cat=$('cat').value;
+ view=deck.filter(c=>{
+  const hay=(c.term+' '+c.answer+' '+c.detail+' '+c.memo+' '+c.ety+' '+c.note).toLowerCase();
+  return (!q||hay.includes(q)) && (cat==='ทั้งหมด'||c.cat===cat) && (!examOnly||c.exam) && (!starOnly||stars.has(c.id));
+ });
+ idx=0; render();
+}
+function badge(exam){return exam?'<span class="badge">🎯 ข้อสอบเก่า / High-yield</span>':''}
+function renderMedia(wrap,img,cap,uri,text){
+ if(uri){$(wrap).style.display='flex';$(img).src=uri;$(cap).textContent=text||''}
+ else{$ (wrap).style.display='none';$(img).removeAttribute('src');$(cap).textContent=''}
+}
+function render(){
+ if(!view.length){$('wrap').style.display='none';$('empty').style.display='block';$('counter').textContent='0 cards';$('bar').style.width='0%';renderList();return}
+ $('wrap').style.display='block';$('empty').style.display='none';
+ if(idx<0)idx=view.length-1;if(idx>=view.length)idx=0;
+ const c=view[idx];$('card').classList.remove('flipped');
+ $('fcat').textContent=c.cat;$('bcat').textContent=c.cat;$('fbadge').innerHTML=badge(c.exam);$('bbadge').innerHTML=badge(c.exam);
+ $('term').textContent=c.term;$('answer').textContent=c.answer;$('detail').textContent=c.detail||'';
+ renderMedia('frontMedia','frontImg','frontCap',c.front_img,c.imgcap);
+ renderMedia('backMedia','backImg','backCap',c.back_img,c.imgcap);
+ $('memoBox').style.display=c.memo?'block':'none';$('memo').textContent=c.memo||'';
+ $('etyBox').style.display=c.ety?'block':'none';$('ety').textContent=c.ety||'';
+ $('noteBox').style.display=c.note?'block':'none';$('note').textContent=c.note||'';
+ $('steps').innerHTML='';(c.steps||[]).forEach((s,i)=>{let a=document.createElement('span');a.className='step';a.textContent=s;$('steps').appendChild(a);if(i<c.steps.length-1){let ar=document.createElement('span');ar.className='arr';ar.textContent='→';$('steps').appendChild(ar)}});
+ $('source').textContent='อ้างอิง: '+c.source;
+ $('star').textContent=stars.has(c.id)?'★':'☆';$('star').classList.toggle('on',stars.has(c.id));
+ $('counter').textContent=`${idx+1} / ${view.length}`;
+ $('score').textContent=`จำได้ ${known.size} · ทบทวน ${review.size} · ★ ${stars.size}`;
+ $('deckstat').textContent=`ทั้งหมด ${original.length} การ์ด`;
+ $('bar').style.width=((idx+1)/view.length*100)+'%';
+ renderList();
+}
+function renderList(){
+ $('list').innerHTML='';
+ view.forEach((c,i)=>{let d=document.createElement('div');d.className='item'+(i===idx?' active':'');let l=document.createElement('div');l.textContent=c.term;let s=document.createElement('small');s.textContent=(c.exam?'🎯 ':'')+c.cat;d.append(l,s);d.onclick=()=>{idx=i;render();window.scrollTo({top:170,behavior:'smooth'})};$('list').appendChild(d)});
+}
+function next(){if(view.length){idx=(idx+1)%view.length;render()}}
+function prev(){if(view.length){idx=(idx-1+view.length)%view.length;render()}}
+$('card').onclick=()=> $('card').classList.toggle('flipped');
+$('next').onclick=next;$('prev').onclick=prev;
+$('know').onclick=()=>{if(!view.length)return;known.add(view[idx].id);review.delete(view[idx].id);localStorage.setItem('u5known',JSON.stringify([...known]));localStorage.setItem('u5review',JSON.stringify([...review]));next()};
+$('again').onclick=()=>{if(!view.length)return;review.add(view[idx].id);localStorage.setItem('u5review',JSON.stringify([...review]));next()};
+$('star').onclick=e=>{e.stopPropagation();if(!view.length)return;let id=view[idx].id;stars.has(id)?stars.delete(id):stars.add(id);localStorage.setItem('u5stars',JSON.stringify([...stars]));render()};
+$('shuffle').onclick=()=>{deck.sort(()=>Math.random()-.5);apply()};
+$('reset').onclick=()=>{deck=[...original];idx=0;examOnly=false;starOnly=false;$('search').value='';$('cat').value='ทั้งหมด';$('examOnly').style.background='#fff';$('starOnly').style.background='#fff';apply()};
+$('search').addEventListener('input',apply);$('cat').addEventListener('change',apply);
+$('examOnly').onclick=()=>{examOnly=!examOnly;$('examOnly').style.background=examOnly?'#fff4e8':'#fff';apply()};
+$('starOnly').onclick=()=>{starOnly=!starOnly;$('starOnly').style.background=starOnly?'#fff8dc':'#fff';apply()};
+document.addEventListener('keydown',e=>{if(e.target.tagName==='INPUT')return;if(e.code==='Space'){e.preventDefault();$('card').classList.toggle('flipped')}if(e.key==='ArrowRight')next();if(e.key==='ArrowLeft')prev()});
+render();
+</script>
+</body></html>
