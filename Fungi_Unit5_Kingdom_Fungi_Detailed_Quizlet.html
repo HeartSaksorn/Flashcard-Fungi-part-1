@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Loading Unit 5...</title>
+<style>
+body{font-family:-apple-system,BlinkMacSystemFont,"Noto Sans Thai",Arial,sans-serif;display:grid;place-items:center;min-height:100vh;margin:0;background:#f6f7fb;color:#344054}.box{background:#fff;padding:24px;border-radius:16px;box-shadow:0 8px 30px #10182814;text-align:center;line-height:1.7}
+</style>
+</head>
+<body><div class="box">🍄 กำลังโหลด Unit 5...</div>
+<script>
+(async()=>{
+ try{
+  const parts=Array.from({length:8},(_,i)=>`unit5_parts/p${String(i).padStart(2,'0')}.txt`);
+  const html=(await Promise.all(parts.map(p=>fetch(p,{cache:'no-store'}).then(r=>{if(!r.ok)throw new Error(p+' '+r.status);return r.text()})))).join('');
+  document.open();document.write(html);document.close();
+ }catch(e){
+  document.body.innerHTML='<div class="box">โหลด Unit 5 ไม่สำเร็จ<br><small>'+e.message+'</small><br>ลอง Reload อีกครั้ง</div>';
+ }
+})();
+</script></body></html>
